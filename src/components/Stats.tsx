@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import AnimatedCounter from "./AnimatedCounter";
 
 const Stats = () => {
@@ -63,9 +64,9 @@ const Stats = () => {
           <motion.span 
             animate={{ x: [0, 10, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-            className="text-primary-foreground text-4xl mr-4"
+            className="text-primary-foreground mr-4"
           >
-            →
+            <ArrowRight className="w-8 h-8 md:w-10 md:h-10" />
           </motion.span>
           <p className="text-lg text-primary-foreground/90">
             Мы экспертны ровно на столько, чтобы задать необходимое количество вопросов и самим предложить решение

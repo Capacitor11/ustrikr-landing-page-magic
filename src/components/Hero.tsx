@@ -4,11 +4,17 @@ import { motion } from "framer-motion";
 
 const Hero = () => {
   return (
-    <section className="min-h-screen flex items-center pt-20 pb-16 px-6 relative overflow-hidden bg-background">
+    <section id="hero" className="min-h-screen flex items-center pt-20 pb-16 px-6 relative overflow-hidden" style={{
+      background: 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(255 60% 98%) 30%, hsl(255 70% 97%) 60%, hsl(var(--background)) 100%)'
+    }}>
+      {/* Beautiful gradient overlay */}
+      <div className="absolute inset-0 opacity-40" style={{
+        background: 'radial-gradient(ellipse at top left, hsl(255 70% 60% / 0.15), transparent 50%), radial-gradient(ellipse at bottom right, hsl(255 60% 50% / 0.12), transparent 50%)'
+      }} />
       {/* Animated floating blobs */}
       <div className="floating-blob w-[600px] h-[600px] bg-primary/10 -top-40 -right-40" style={{ animationDelay: '0s' }} />
       <div className="floating-blob w-[500px] h-[500px] bg-violet-medium/10 top-1/2 -left-60" style={{ animationDelay: '-5s' }} />
-      <div className="floating-blob w-[400px] h-[400px] bg-accent/10 bottom-20 right-1/4" style={{ animationDelay: '-10s' }} />
+      <div className="floating-blob w-[400px] h-[400px] bg-primary/8 bottom-20 right-1/4" style={{ animationDelay: '-10s' }} />
       
       <div className="container mx-auto relative z-10">
         <div className="max-w-4xl">
@@ -29,6 +35,7 @@ const Hero = () => {
               <motion.span
                 animate={{ x: [0, 10, 0] }}
                 transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="flex-shrink-0"
               >
                 <ArrowRight className="w-10 h-10 md:w-14 md:h-14 flex-shrink-0" />
               </motion.span>
@@ -50,17 +57,20 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.7 }}
           >
-            <Button className="cta-button text-lg">
-              Обсудить проект
+            <Button asChild className="cta-button text-lg">
+              <a href="https://t.me/kardashov" target="_blank" rel="noopener noreferrer">
+                Обсудить проект
+              </a>
             </Button>
           </motion.div>
         </div>
       </div>
       
-      {/* Decorative grid pattern */}
-      <div className="absolute inset-0 z-0 opacity-[0.015]" style={{
-        backgroundImage: 'linear-gradient(hsl(var(--foreground)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--foreground)) 1px, transparent 1px)',
-        backgroundSize: '60px 60px'
+      {/* Decorative grid pattern with gradient */}
+      <div className="absolute inset-0 z-0 opacity-[0.02]" style={{
+        backgroundImage: 'linear-gradient(hsl(var(--primary) / 0.1) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px)',
+        backgroundSize: '60px 60px',
+        maskImage: 'radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%)'
       }} />
     </section>
   );

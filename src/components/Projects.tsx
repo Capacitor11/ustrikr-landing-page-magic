@@ -126,34 +126,110 @@ const ProjectCard = ({ project, index }: { project: Project; index: number }) =>
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
-      whileHover={{ y: -8 }}
+      whileHover={{ y: -12, scale: 1.02 }}
       className="project-card group relative overflow-hidden"
     >
-      {/* Gradient background on hover */}
-      <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
+      {/* Enhanced gradient background on hover */}
+      <motion.div 
+        className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500`}
+        animate={{
+          backgroundPosition: ['0% 0%', '100% 100%'],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          repeatType: "reverse",
+          ease: "linear"
+        }}
+        style={{
+          backgroundSize: '200% 200%'
+        }}
+      />
+      
+      {/* Shimmer effect */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100"
+        style={{
+          background: 'linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.15), transparent)',
+          transform: 'translateX(-100%)'
+        }}
+        animate={{
+          x: ['-100%', '200%']
+        }}
+        transition={{
+          duration: 2,
+          repeat: Infinity,
+          repeatDelay: 3
+        }}
+      />
+      
+      {/* Glow effect */}
+      <motion.div
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+        style={{
+          background: 'radial-gradient(circle at center, hsl(var(--primary) / 0.1), transparent 70%)',
+          filter: 'blur(20px)'
+        }}
+      />
       
       <div className="relative z-10">
         <div className="flex items-center justify-between mb-4">
-          <span className="text-lg font-bold text-muted-foreground">{project.logo}</span>
+          <motion.span 
+            className="text-lg font-bold text-muted-foreground group-hover:text-primary transition-colors duration-300"
+            whileHover={{ scale: 1.05 }}
+          >
+            {project.logo}
+          </motion.span>
           <motion.div
             initial={{ opacity: 0, scale: 0 }}
-            whileHover={{ opacity: 1, scale: 1 }}
-            className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity"
+            whileHover={{ opacity: 1, scale: 1.1, rotate: 45 }}
+            className="w-10 h-10 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all duration-300 relative overflow-hidden"
+            style={{
+              background: 'linear-gradient(135deg, hsl(var(--primary)), hsl(255 60% 50%))',
+              boxShadow: '0 4px 16px hsl(var(--primary) / 0.4)'
+            }}
           >
-            <ArrowUpRight className="w-4 h-4 text-primary" />
+            <ArrowUpRight className="w-5 h-5 text-primary-foreground relative z-10" />
+            <motion.div
+              className="absolute inset-0"
+              style={{
+                background: 'radial-gradient(circle, hsl(0 0% 100% / 0.3), transparent)'
+              }}
+              animate={{
+                scale: [1, 1.5, 1],
+                opacity: [0.5, 0, 0.5]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity
+              }}
+            />
           </motion.div>
         </div>
-        <h3 className="text-lg font-semibold text-foreground mb-4 group-hover:text-primary transition-colors duration-300">{project.title}</h3>
+        <h3 className="text-lg font-semibold text-foreground mb-4 group-hover:text-primary transition-all duration-300 relative" style={{
+          textShadow: '0 1px 2px hsl(var(--foreground) / 0.1)'
+        }}>
+          {project.title}
+        </h3>
         <ul className="space-y-2 mb-6">
           {project.details.map((detail, i) => (
-            <li key={i} className="text-sm text-muted-foreground">{detail}</li>
+            <motion.li 
+              key={i} 
+              className="text-sm text-muted-foreground"
+              initial={{ opacity: 0.8 }}
+              whileHover={{ opacity: 1, x: 4 }}
+              transition={{ duration: 0.2 }}
+            >
+              {detail}
+            </motion.li>
           ))}
         </ul>
         <div className="flex flex-wrap gap-2">
           {project.tags.map((tag, i) => (
             <motion.span 
               key={i} 
-              whileHover={{ scale: 1.05 }}
+              whileHover={{ scale: 1.1, rotate: [0, -2, 2, 0] }}
+              transition={{ duration: 0.3 }}
               className="tag-badge"
             >
               {tag}
